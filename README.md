@@ -2,4 +2,12 @@
 
 Yes! Free to use.
 
+![Screenshot](https://github.com/tommyjepsen/nextjs-typescript-tailwind-api-chart-example/screenshot.png "Screenshot")
+
+
+Check it out on <https://nextjs-typescript-tailwind-api-chart-example.vercel.app/>
+
+
+
 Peace.
+
