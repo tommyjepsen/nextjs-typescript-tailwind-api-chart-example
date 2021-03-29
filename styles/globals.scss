@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.navbar-item {
+	@apply p-5;
+	@apply rounded;
+	@apply hover:bg-yellow-100;
+	@apply cursor-pointer;
+	@apply text-sm;
+	@apply font-semibold;
+}
