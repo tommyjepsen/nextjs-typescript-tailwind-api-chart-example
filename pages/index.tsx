@@ -7,7 +7,8 @@ export default function Page() {
 	const [chartMax, setChartMax] = useState(0);
 
 	useEffect(() => {
-		fetch("http://localhost:3000/api/v1/chart")
+		//Local URL: http://localhost:3000/api/v1/chart
+		fetch("https://nextjs-typescript-tailwind-api-chart-example.vercel.app/api/v1/chart")
 			.then((response) => {
 				response.json().then((data) => {
 					console.log("data", data);
