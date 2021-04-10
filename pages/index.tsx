@@ -15,7 +15,7 @@ export default function Page() {
   useEffect(() => {
     //Local URL: http://localhost:3000/api/v1/chart
     //Prod URL: https://nextjs-typescript-tailwind-api-chart-example.vercel.app/api/v1/chart
-    fetch("http://localhost:3000/api/v1/chart")
+    fetch("https://nextjs-typescript-tailwind-api-chart-example.vercel.app/api/v1/chart")
       .then((response) => response.json())
       .then((data) => {
         var maxHeight = 0;
