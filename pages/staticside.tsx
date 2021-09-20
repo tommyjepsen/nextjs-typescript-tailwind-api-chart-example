@@ -1,27 +1,14 @@
-import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { animated, config, Spring } from "react-spring";
 import fetcher, { URL, URL_CHART } from "../lib/fetcher";
 import { Chart } from "../lib/types/chart.type";
 
-type Pros = {
+type Props = {
     chart: Chart[];
+    chartMax: number;
 };
 
-export function Page({ chart }: Pros) {
-    const [chartMax, setChartMax] = useState(0);
-
-    useEffect(() => {
-        let maxHeight = 0;
-        for (const chartItem of chart) {
-            if (chartItem.count > maxHeight) {
-                maxHeight = chartItem.count;
-            }
-        }
-
-        setChartMax(maxHeight);
-    }, [chart]);
-
+export function Page({ chart, chartMax }: Props) {
     return (
         <Layout>
             <div className="flex w-full items-center flex-col">
@@ -81,10 +68,19 @@ export function Page({ chart }: Pros) {
 
 export async function getStaticProps() {
     const data = await fetcher(URL + URL_CHART);
+    let chartMax = 0;
+    if (data) {
+        for (const chartItem of data) {
+            if (chartItem.count > chartMax) {
+                chartMax = chartItem.count;
+            }
+        }
+    }
 
     return {
         props: {
             chart: data,
+            chartMax,
         },
         revalidate: 10,
     };

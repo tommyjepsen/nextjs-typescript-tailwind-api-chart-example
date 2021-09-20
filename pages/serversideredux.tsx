@@ -78,11 +78,8 @@ export function Page({ chart, chartMax }: Props) {
     );
 }
 
-// This gets called on every request
 export async function getServerSideProps() {
-    // Fetch data from external API
     const data = await fetcher(URL + URL_CHART);
-
     let maxHeight = 0;
     if (data) {
         for (const chartItem of data) {
@@ -91,8 +88,6 @@ export async function getServerSideProps() {
             }
         }
     }
-
-    // Pass data to the page via props
     return { props: { chart: data, chartMax: maxHeight } };
 }
 
