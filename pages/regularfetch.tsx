@@ -1,7 +1,6 @@
 import { config, Spring } from "@react-spring/core";
 import { animated } from "@react-spring/web";
 import { useEffect, useState } from "react";
-import Layout from "../components/Layout";
 import fetcher, { URL, URL_CHART } from "../lib/fetcher";
 import { Chart } from "../lib/types/chart.type";
 
@@ -28,7 +27,6 @@ export default function Page() {
     }, []);
 
     return (
-        <Layout>
             <div className="flex w-full items-center flex-col">
                 <h1 className="w-full flex items-start text-lg text-bold pb-20">
                     Home
@@ -80,6 +78,5 @@ export default function Page() {
                     </div>
                 )}
             </div>
-        </Layout>
     );
 }

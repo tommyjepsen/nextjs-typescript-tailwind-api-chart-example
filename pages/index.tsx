@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Layout from "../components/Layout";
 import { animated, config, Spring } from "react-spring";
 import { useDispatch, useSelector } from "react-redux";
 import { API } from "../store/actions/api";
@@ -17,7 +16,6 @@ export default function Page() {
     }, []);
 
     return (
-        <Layout>
             <div className="flex w-full items-center flex-col">
                 <h1 className="w-full flex items-start text-lg text-bold pb-20">
                     Home
@@ -69,6 +67,5 @@ export default function Page() {
                     </div>
                 )}
             </div>
-        </Layout>
     );
 }

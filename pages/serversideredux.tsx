@@ -1,4 +1,3 @@
-import Layout from "../components/Layout";
 import { animated, config, Spring } from "react-spring";
 import fetcher, { URL, URL_CHART } from "../lib/fetcher";
 import { Chart } from "../lib/types/chart.type";
@@ -22,7 +21,6 @@ export function Page({ chart, chartMax }: Props) {
     }, [chart]);
 
     return (
-        <Layout>
             <div className="flex w-full items-center flex-col">
                 <h1 className="w-full flex items-start text-lg text-bold pb-20">
                     Home
@@ -74,7 +72,6 @@ export function Page({ chart, chartMax }: Props) {
                     </div>
                 )}
             </div>
-        </Layout>
     );
 }
 
