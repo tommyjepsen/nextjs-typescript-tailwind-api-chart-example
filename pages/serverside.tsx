@@ -1,22 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { animated, config, Spring } from "react-spring";
-import { useDispatch, useSelector } from "react-redux";
-import { API } from "../store/actions/api";
-import { Store } from "../store/types";
+import fetcher, { URL, URL_CHART } from "../lib/fetcher";
+import { Chart } from "../lib/types/chart.type";
 
-export default function Page() {
-    const {
-        charts: { chart, chartMax },
-    } = useSelector((state: Store) => state);
+type Pros = {
+    chart: Chart[];
+    chartMax: number;
+};
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(API.getCharts);
-    }, []);
-
+export function Page({ chart, chartMax }: Pros) {
     return (
         <Layout>
             <div className="flex w-full items-center flex-col">
@@ -24,7 +16,7 @@ export default function Page() {
                     Home
                 </h1>
 
-                {chart && (
+                {chart && chartMax != 0 && (
                     <div className="flex flex-col bg-gray-50 rounded h-96 p-10 max-w-full overflow-x-auto">
                         <div className="pb-6 pl-3">
                             <p>Monthly chart example</p>
@@ -73,3 +65,23 @@ export default function Page() {
         </Layout>
     );
 }
+
+// This gets called on every request
+export async function getServerSideProps() {
+    // Fetch data from external API
+    const data = await fetcher(URL + URL_CHART);
+
+    let maxHeight = 0;
+    if (data) {
+        for (const chartItem of data) {
+            if (chartItem.count > maxHeight) {
+                maxHeight = chartItem.count;
+            }
+        }
+    }
+
+    // Pass data to the page via props
+    return { props: { chart: data, chartMax: maxHeight } };
+}
+
+export default Page;

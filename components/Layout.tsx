@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React, { ReactNode } from "react";
-
+import Link from "next/link";
 type Props = {
     children?: ReactNode;
 };
@@ -9,29 +9,19 @@ const Layout = ({ children }: Props) => {
     return (
         <div>
             <Head>
-                <title>Databi</title>
+                <title>Next.JS Template</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="flex flex-col items-center min-w-full min-h-screen bg-gray-100 p-0">
                 <div className="flex flex-row items-center max-w-screen-2xl justify-between w-10/12 bg-white border-gray-100 border-b">
-                    <p className="p-5 font-bold">Databi</p>
+                    <p className="p-5 font-bold">Next.JS Template</p>
 
                     <div className="flex flex-row justify-between">
-                        <a className="navbar-item" href="">
-                            Home
-                        </a>
-                        <a className="navbar-item" href="">
-                            Events
-                        </a>
-                        <a className="navbar-item" href="">
-                            Visitors
-                        </a>
-                        <a className="navbar-item" href="">
-                            Products
-                        </a>
-                        <a className="navbar-item" href="">
-                            Profile
-                        </a>
+                        <Link href="/">
+                            <a className="navbar-item" href="">
+                                Home
+                            </a>
+                        </Link>
                     </div>
                 </div>
 

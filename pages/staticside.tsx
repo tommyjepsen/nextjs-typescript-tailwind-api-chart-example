@@ -1,21 +1,26 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { animated, config, Spring } from "react-spring";
-import { useDispatch, useSelector } from "react-redux";
-import { API } from "../store/actions/api";
-import { Store } from "../store/types";
+import fetcher, { URL, URL_CHART } from "../lib/fetcher";
+import { Chart } from "../lib/types/chart.type";
 
-export default function Page() {
-    const {
-        charts: { chart, chartMax },
-    } = useSelector((state: Store) => state);
+type Pros = {
+    chart: Chart[];
+};
 
-    const dispatch = useDispatch();
+export function Page({ chart }: Pros) {
+    const [chartMax, setChartMax] = useState(0);
 
     useEffect(() => {
-        dispatch(API.getCharts);
-    }, []);
+        let maxHeight = 0;
+        for (const chartItem of chart) {
+            if (chartItem.count > maxHeight) {
+                maxHeight = chartItem.count;
+            }
+        }
+
+        setChartMax(maxHeight);
+    }, [chart]);
 
     return (
         <Layout>
@@ -24,7 +29,7 @@ export default function Page() {
                     Home
                 </h1>
 
-                {chart && (
+                {chart && chartMax != 0 && (
                     <div className="flex flex-col bg-gray-50 rounded h-96 p-10 max-w-full overflow-x-auto">
                         <div className="pb-6 pl-3">
                             <p>Monthly chart example</p>
@@ -73,3 +78,16 @@ export default function Page() {
         </Layout>
     );
 }
+
+export async function getStaticProps() {
+    const data = await fetcher(URL + URL_CHART);
+
+    return {
+        props: {
+            chart: data,
+        },
+        revalidate: 10,
+    };
+}
+
+export default Page;

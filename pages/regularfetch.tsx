@@ -1,20 +1,30 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { config, Spring } from "@react-spring/core";
+import { animated } from "@react-spring/web";
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import { animated, config, Spring } from "react-spring";
-import { useDispatch, useSelector } from "react-redux";
-import { API } from "../store/actions/api";
-import { Store } from "../store/types";
+import fetcher, { URL, URL_CHART } from "../lib/fetcher";
+import { Chart } from "../lib/types/chart.type";
 
 export default function Page() {
-    const {
-        charts: { chart, chartMax },
-    } = useSelector((state: Store) => state);
-
-    const dispatch = useDispatch();
+    const [chart, setChart] = useState<Chart[]>([]);
+    const [chartMax, setChartMax] = useState(0);
 
     useEffect(() => {
-        dispatch(API.getCharts);
+        fetcher(URL + URL_CHART)
+            .then((data) => {
+                let maxHeight = 0;
+                for (const chart of data) {
+                    if (chart.count > maxHeight) {
+                        maxHeight = chart.count;
+                    }
+                }
+
+                setChartMax(maxHeight);
+                setChart(data || []);
+            })
+            .catch((error) => {
+                console.log("error", error);
+            });
     }, []);
 
     return (
