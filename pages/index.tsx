@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Layout from "../components/Layout";
 import { animated, config, Spring } from "react-spring";
 import { useDispatch, useSelector } from "react-redux";
