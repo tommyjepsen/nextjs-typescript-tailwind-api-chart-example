@@ -19,7 +19,27 @@ const Layout = ({ children }: Props) => {
                     <div className="flex flex-row justify-between">
                         <Link href="/">
                             <a className="navbar-item" href="">
-                                Home
+                                Redux Fetch
+                            </a>
+                        </Link>
+                        <Link href="/serverside">
+                            <a className="navbar-item" href="">
+                                Serverside
+                            </a>
+                        </Link>
+                        <Link href="/serversideredux">
+                            <a className="navbar-item" href="">
+                                Serverside to redux
+                            </a>
+                        </Link>
+                        <Link href="/staticside">
+                            <a className="navbar-item" href="">
+                                Staticside
+                            </a>
+                        </Link>
+                        <Link href="/regularfetch">
+                            <a className="navbar-item" href="">
+                                Regular fetch
                             </a>
                         </Link>
                     </div>
